@@ -13,6 +13,14 @@ import java.util.ArrayList;
 public class JavaFX extends Application {
 	TextField temperature,weather;
 
+
+	//Scene 1 attributes
+	Scene s1;
+
+	//Scene 2 attributes
+	Scene s2;
+
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -33,8 +41,13 @@ public class JavaFX extends Application {
 		
 		
 				
-		Scene scene = new Scene(new VBox(temperature,weather), 700,700);
-		primaryStage.setScene(scene);
+		s1 = new Scene(new VBox(temperature,weather), 700,700);
+		//End of Scene1
+		//Everything below is start of scene2
+
+
+		//Default scene shown
+		primaryStage.setScene(s1);
 		primaryStage.show();
 	}
 
