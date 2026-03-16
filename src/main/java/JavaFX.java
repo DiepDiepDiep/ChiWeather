@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import weather.Period;
 import weather.WeatherAPI;
 
+import javax.swing.text.html.ImageView;
 import java.util.ArrayList;
 
 public class JavaFX extends Application {
@@ -29,6 +31,24 @@ public class JavaFX extends Application {
 
 	//Scene 2 attributes
 	Scene s2;
+	VBox s2vbMain;
+	HBox s2hbTitle, s2hbDay1, s2hbDay2, s2hbDay3;
+
+	VBox s2vbD1Temp, s2vbD1Forcast, s2vbD1Speed, s2vbD1Direction;
+	TextField D1Day, D1DTemp, D1NTemp, D1Speed;
+	ImageView D1DForcast, D1NForcast, D1Arrow, D1Compass;
+	StackPane D1Direction;
+
+	VBox s2vbD2Temp, s2vbD2Forcast, s2vbD2Speed, s2vbD2Direction;
+	TextField D2Day, D2DTemp, D2NTemp, D2Speed;
+	ImageView D2DForcast, D2NForcast, D2Arrow, D2Compass;
+	StackPane D2Direction;
+
+	VBox s2vbD3Temp, s2vbD3Forcast, s2vbD3Speed, s2vbD3Direction;
+	TextField D3Day, D3DTemp, D3NTemp, D3Speed;
+	ImageView D3DForcast, D3NForcast, D3Arrow, D3Compass;
+	StackPane D3Direction;
+
 
 
 	public static void main(String[] args) {
