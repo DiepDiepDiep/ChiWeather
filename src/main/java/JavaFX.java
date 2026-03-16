@@ -25,7 +25,7 @@ public class JavaFX extends Application {
 	VBox s1vbMain, s1vbHour1, s1vbHour2, s1vbHour3, s1vbHour4, s1vbHour5, s1vbHour6, s1vbHour7;
 	HBox s1hbTemp, s1hbWeather, s1hbHourlyTemp, s1hbButton;
 	Button s1bThreeDayForecast;
-
+	BorderPane s1bp;
 
 	//Scene 2 attributes
 	Scene s2;
@@ -53,7 +53,10 @@ public class JavaFX extends Application {
 
 		//Will add more components to main's vbox. Just used to display for now
 		s1vbMain = new VBox(20,s1hbTemp, s1hbWeather);
-		s1 = new Scene(s1vbMain, 700, 700);
+		s1bp = new BorderPane();
+		s1bp.setPadding(new Insets(20));
+		s1bp.setCenter(s1vbMain);
+		s1 = new Scene(s1bp, 700, 700);
 		//End of Scene1
 
 
