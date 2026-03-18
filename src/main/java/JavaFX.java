@@ -1,11 +1,13 @@
 import javafx.application.Application;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -29,15 +31,18 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class JavaFX extends Application {
-	TextField temperature,weather;
 
+	//Scene 1 attributes
 
+	TextArea temperature,weather;
 	//Scene 1 attributes
 	Scene s1;
 	VBox s1vbMain, s1vbHour1, s1vbHour2, s1vbHour3, s1vbHour4, s1vbHour5, s1vbHour6, s1vbHour7;
 	HBox s1hbTemp, s1hbWeather, s1hbHourlyTemp, s1hbButton;
 	Button s1bThreeDayForecast;
 	BorderPane s1bp;
+	TextField s1tfHour1, s1tfHour2, s1tfHour3, s1tfHour4, s1tfHour5, s1tfHour6, s1tfHour7;
+
 
 	//Scene 2 attributes
 	Scene s2;
@@ -61,6 +66,23 @@ public class JavaFX extends Application {
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
 	//Scene1 Functions
+
+	private class ButtonExitHandler implements EventHandler<ActionEvent>{
+
+		@Override
+		public void handle(ActionEvent actionEvent) {
+			Platform.exit();
+		}
+	}
+
+
+	private void makeScene1Hourly(ArrayList<Period> forecast, int hour){
+		s1tfHour1 = new TextField();
+		s1tfHour1.setEditable(false);
+		s1tfHour1.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour1 = new VBox(20,s1tfHour1);
+		s1vbHour1.setPrefWidth(75);
+	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
 	//Scene2 Functions
@@ -102,22 +124,70 @@ public class JavaFX extends Application {
 
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
-		//Start of Scene 1
-		temperature = new TextField();
-		weather = new TextField();
-		temperature.setText("Today's weather is: "+String.valueOf(forecast.get(0).temperature));
-		weather.setText(forecast.get(0).shortForecast);
-		
+		//Scene 1 Start
+
+		//TOP HBOX
+		temperature = new TextArea();
+		temperature.setPrefWidth(700);
+		temperature.setEditable(false);
+		temperature.setMaxHeight(7);
+
+		weather = new TextArea();
+		weather.setWrapText(true);
+		weather.setPrefWidth(700);
+		weather.setPrefHeight(70);
+		weather.setEditable(false);
+
+		temperature.setText("Today's weather is: "+String.valueOf(forecast.get(0).temperature)+" °F");
+		weather.setText("Today's conditions: "+forecast.get(0).detailedForecast);
 		s1hbTemp = new HBox(20, temperature);
 		s1hbWeather = new HBox(20, weather);
 
-		//Will add more components to main's vbox. Just used to display for now
-		s1vbMain = new VBox(20,s1hbTemp, s1hbWeather);
-		s1bp = new BorderPane();
-		s1bp.setPadding(new Insets(20));
-		s1bp.setCenter(s1vbMain);
-		s1 = new Scene(s1bp, 700, 700);
-		//End of Scene1
+//HBOX with hourly times
+		s1tfHour1 = new TextField();
+		s1tfHour1.setEditable(false);
+		s1tfHour1.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour1 = new VBox(20,s1tfHour1);
+		s1vbHour1.setPrefWidth(75);
+
+		s1tfHour2 = new TextField();
+		s1tfHour2.setEditable(false);
+		s1tfHour2.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour2 = new VBox(20,s1tfHour2);
+		s1vbHour2.setPrefWidth(75);
+
+		s1tfHour3 = new TextField();
+		s1tfHour3.setEditable(false);
+		s1tfHour3.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour3 = new VBox(20,s1tfHour3);
+		s1vbHour3.setPrefWidth(75);
+
+		s1tfHour4 = new TextField();
+		s1tfHour4.setEditable(false);
+		s1tfHour4.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour4 = new VBox(20,s1tfHour4);
+		s1vbHour4.setPrefWidth(75);
+
+		s1tfHour5 = new TextField();
+		s1tfHour5.setEditable(false);
+		s1tfHour5.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour5 = new VBox(20,s1tfHour5);
+		s1vbHour5.setPrefWidth(75);
+
+		s1tfHour6 = new TextField();
+		s1tfHour6.setEditable(false);
+		s1tfHour6.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour6 = new VBox(20,s1tfHour6);
+		s1vbHour6.setPrefWidth(75);
+
+		s1tfHour7 = new TextField();
+		s1tfHour7.setEditable(false);
+		s1tfHour7.setText(String.valueOf(forecast.get(0).temperature));
+		s1vbHour7 = new VBox(20,s1tfHour7);
+		s1vbHour7.setPrefWidth(75);
+
+		s1hbHourlyTemp = new HBox(20, s1vbHour1, s1vbHour2, s1vbHour3, s1vbHour4, s1vbHour5, s1vbHour6, s1vbHour7);
+
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 		//Start of Scene2
