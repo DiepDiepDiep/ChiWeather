@@ -120,6 +120,11 @@ public class JavaFX extends Application {
 			throw new RuntimeException("Forecast did not load");
 		}
 
+		ArrayList<Period> hourlyForecast = WeatherAPI.getHourlyForecast("LOT",77,70);
+		if (hourlyForecast == null){
+			throw new RuntimeException("Hourly forecast did not load");
+		}
+
 		//Get the city/location of current location.
 
 
@@ -146,7 +151,7 @@ public class JavaFX extends Application {
 //HBOX with hourly times
 		s1tfHour1 = new TextField();
 		s1tfHour1.setEditable(false);
-		s1tfHour1.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour1.setText(String.valueOf(forecast.get(0).));
 		s1vbHour1 = new VBox(20,s1tfHour1);
 		s1vbHour1.setPrefWidth(75);
 
