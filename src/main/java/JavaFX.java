@@ -59,7 +59,11 @@ public class JavaFX extends Application {
 	ImageView s2D3Dforecast, s2D3Nforecast, s2D3Arrow, s2D3Compass;
 	StackPane s2D3Direction;
 
-	//Joshua's Functions
+	//--------------------------------------------------------------------------------------------------------------------------------------------
+	//Scene1 Functions
+
+	//--------------------------------------------------------------------------------------------------------------------------------------------
+	//Scene2 Functions
 	public class Locations {
 		int Long;
 		int Lat;
@@ -74,9 +78,11 @@ public class JavaFX extends Application {
 	public static int getAvgDTemp(ArrayList<Period> Hourly, LocalDate Date) {
 		int avg = 0, count = 0;
 		for (Period p : Hourly) {
-			if(Hourly.)
 		}
+		return 0;
 	}
+
+	//--------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static void main(String[] args) {
 		launch(args);
@@ -114,7 +120,6 @@ public class JavaFX extends Application {
 		//End of Scene1
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-
 		//Start of Scene2
 		ArrayList<Period> forecastTemp = WeatherAPI.getForecast("LOT",77,70);
 		if (forecastTemp == null) {
