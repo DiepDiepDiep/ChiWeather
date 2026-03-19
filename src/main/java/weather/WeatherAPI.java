@@ -28,7 +28,7 @@ public class WeatherAPI {
         }
         return r.properties.periods;
     }
-    public static ArrayList<Period> getHourlyForecast(String region, int gridx, int gridy) {
+    public static Properties getHourlyForecast(String region, int gridx, int gridy) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.weather.gov/gridpoints/"+region+"/"+String.valueOf(gridx)+","+String.valueOf(gridy)+"/forecast/hourly"))
                 .build();
@@ -38,12 +38,12 @@ public class WeatherAPI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Root r = getObject(response.body());
+        Root r = getObjectHourly(response.body());
         if(r == null){
             System.err.println("Failed to parse JSon");
             return null;
         }
-        return r.properties.periods;
+        return r.properties;
     }
     public static Root getObject(String json){
         ObjectMapper om = new ObjectMapper();
@@ -54,6 +54,21 @@ public class WeatherAPI {
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+        }
+        return toRet;
+
+    }
+
+    public static Root getObjectHourly(String json){
+        ObjectMapper om = new ObjectMapper();
+        Root toRet = null;
+        try {
+            toRet = om.readValue(json, Root.class);
+            Properties p = toRet.properties;
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            System.err.println("getObjectHourly failed");
         }
         return toRet;
 

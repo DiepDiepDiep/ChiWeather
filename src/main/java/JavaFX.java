@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import weather.Period;
+import weather.Properties;
 import weather.WeatherAPI;
 
 import java.util.Date;
@@ -120,7 +121,7 @@ public class JavaFX extends Application {
 			throw new RuntimeException("Forecast did not load");
 		}
 
-		ArrayList<Period> hourlyForecast = WeatherAPI.getHourlyForecast("LOT",77,70);
+		Properties hourlyForecast = WeatherAPI.getHourlyForecast("LOT",77,70);
 		if (hourlyForecast == null){
 			throw new RuntimeException("Hourly forecast did not load");
 		}
@@ -151,48 +152,53 @@ public class JavaFX extends Application {
 //HBOX with hourly times
 		s1tfHour1 = new TextField();
 		s1tfHour1.setEditable(false);
-		s1tfHour1.setText(String.valueOf(forecast.get(0).));
+		s1tfHour1.setText(String.valueOf(hourlyForecast.periods.get(1).temperature));
 		s1vbHour1 = new VBox(20,s1tfHour1);
 		s1vbHour1.setPrefWidth(75);
 
 		s1tfHour2 = new TextField();
 		s1tfHour2.setEditable(false);
-		s1tfHour2.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour2.setText(String.valueOf(hourlyForecast.periods.get(2).temperature));
 		s1vbHour2 = new VBox(20,s1tfHour2);
 		s1vbHour2.setPrefWidth(75);
 
 		s1tfHour3 = new TextField();
 		s1tfHour3.setEditable(false);
-		s1tfHour3.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour3.setText(String.valueOf(hourlyForecast.periods.get(3).temperature));
 		s1vbHour3 = new VBox(20,s1tfHour3);
 		s1vbHour3.setPrefWidth(75);
 
 		s1tfHour4 = new TextField();
 		s1tfHour4.setEditable(false);
-		s1tfHour4.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour4.setText(String.valueOf(hourlyForecast.periods.get(4).temperature));
 		s1vbHour4 = new VBox(20,s1tfHour4);
 		s1vbHour4.setPrefWidth(75);
 
 		s1tfHour5 = new TextField();
 		s1tfHour5.setEditable(false);
-		s1tfHour5.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour5.setText(String.valueOf(hourlyForecast.periods.get(5).temperature));
 		s1vbHour5 = new VBox(20,s1tfHour5);
 		s1vbHour5.setPrefWidth(75);
 
 		s1tfHour6 = new TextField();
 		s1tfHour6.setEditable(false);
-		s1tfHour6.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour6.setText(String.valueOf(hourlyForecast.periods.get(6).temperature));
 		s1vbHour6 = new VBox(20,s1tfHour6);
 		s1vbHour6.setPrefWidth(75);
 
 		s1tfHour7 = new TextField();
 		s1tfHour7.setEditable(false);
-		s1tfHour7.setText(String.valueOf(forecast.get(0).temperature));
+		s1tfHour7.setText(String.valueOf(forecast.get(7).temperature));
 		s1vbHour7 = new VBox(20,s1tfHour7);
 		s1vbHour7.setPrefWidth(75);
 
 		s1hbHourlyTemp = new HBox(20, s1vbHour1, s1vbHour2, s1vbHour3, s1vbHour4, s1vbHour5, s1vbHour6, s1vbHour7);
+		s1vbMain = new VBox(20,s1hbTemp,s1hbWeather,s1hbHourlyTemp);
+		s1bp = new BorderPane();
+		s1bp.setPadding(new Insets(20));
+		s1bp.setCenter(s1vbMain);
 
+		s1 = new Scene(s1bp,700,700);
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 		//Start of Scene2
@@ -229,7 +235,7 @@ public class JavaFX extends Application {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Default scene shown
-		primaryStage.setScene(s2);
+		primaryStage.setScene(s1);
 		primaryStage.show();
 	}
 

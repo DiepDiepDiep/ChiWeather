@@ -17,4 +17,6 @@ public class Period{
     public String icon;
     public String shortForecast;
     public String detailedForecast;
+    public Dewpoint dewpoint;
+    public RelativeHumidity relativeHumidity;
 }
