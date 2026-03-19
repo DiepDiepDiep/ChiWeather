@@ -19,9 +19,12 @@ import weather.Period;
 import weather.Properties;
 import weather.WeatherAPI;
 
+import java.awt.*;
 import java.util.Date;
 
-import javax.swing.text.html.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -30,6 +33,7 @@ import java.time.Instant;
 
 import java.time.format.TextStyle;
 import java.util.Locale;
+
 
 public class JavaFX extends Application {
 
@@ -98,11 +102,59 @@ public class JavaFX extends Application {
 		}
 	}
 
-	public static int getAvgDTemp(ArrayList<Period> Hourly, LocalDate Date) {
-		int avg = 0, count = 0;
-		for (Period p : Hourly) {
+	public static double getDirection(String direction) {
+		double angle = 0;
+
+		if(direction == "N") {
+			angle = 0;
 		}
-		return 0;
+		else if(direction == "NNE") {
+			angle = 22.5;
+		}
+		else if(direction == "NE") {
+			angle = 45;
+		}
+		else if(direction == "ENE") {
+			angle = 67.5;
+		}
+		else if(direction == "E") {
+			angle = 90;
+		}
+		else if(direction == "ESE") {
+			angle = 112.5;
+		}
+		else if(direction == "SE") {
+			angle = 135;
+		}
+		else if(direction == "SSE") {
+			angle = 157.5;
+		}
+		else if(direction == "S") {
+			angle = 180;
+		}
+		else if(direction == "SSW") {
+			angle = 202.5;
+		}
+		else if(direction == "SW") {
+			angle = 225;
+		}
+		else if(direction == "WSW") {
+			angle = 247.5;
+		}
+		else if(direction == "W") {
+			angle = 270;
+		}
+		else if(direction == "WNW") {
+			angle = 292.5;
+		}
+		else if(direction == "NW") {
+			angle = 315;
+		}
+		else if(direction == "NNW") {
+			angle = 337.5;
+		}
+
+		return angle;
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
@@ -208,11 +260,21 @@ public class JavaFX extends Application {
 		}
 		//Set up the elements for the smaller VBox's
 
-		//-------------------------
+		int PerShift = 0; //Variable that determines if tomorrow is 1 period away or 2 period away
+
+		if(!forecastTemp.get(0).isDaytime) {
+			PerShift = 1;
+		}
+		else {
+			PerShift = 2;
+		}
+
+		//s2D1Temp (Day, Day Temp, Night Temp)
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		 s2D1Day = new TextField();
 
 		 //Get the current Date from the API
-		 LocalDate localDate = forecastTemp.get(0).startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		 LocalDate localDate = forecastTemp.get(PerShift).startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		 String dayName = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
 
 		 //Set text for s2D1Day to day
@@ -222,13 +284,69 @@ public class JavaFX extends Application {
 		 s2D1DTemp = new TextField();
 
 		 //Get the current day temperature
-		 s2D1DTemp.setText("Day: " + forecastTemp.get(0).temperature + forecastTemp.get(0).temperatureUnit);
-
+		 s2D1DTemp.setText("Day: " + forecastTemp.get(PerShift).temperature + forecastTemp.get(PerShift).temperatureUnit);
 		 //-------------------------
 		 s2D1NTemp = new TextField();
 
+		 s2D1NTemp.setText("Night: " + forecastTemp.get(PerShift + 1).temperature + forecastTemp.get(PerShift + 1).temperatureUnit);
+	    //-------------------------
+		s2vbD1Temp = new VBox(10, s2D1Day, s2D1DTemp,s2D1NTemp);
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		 s2 = new Scene(s2D1DTemp, 700, 700);
+		//s2D1Forecast (Icons)
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		Image Dforecast = new Image(forecastTemp.get(PerShift).icon);
+
+		s2D1Dforecast = new ImageView(Dforecast);
+		//-------------------------
+		Image Nforecast = new Image(forecastTemp.get(PerShift).icon);
+
+		s2D1Nforecast = new ImageView(Nforecast);
+		//-------------------------
+		s2vbD1forecast = new VBox(10, s2D1Dforecast, s2D1Nforecast);
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		//s2D1Speed (Wind Speed)
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		s2D1Speed = new TextField();
+
+		//Get the current wind speed.
+		s2D1Speed.setText(forecastTemp.get(PerShift).windSpeed);
+		//-------------------------
+		s2vbD1Speed = new VBox(10, s2D1Speed);
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		//s2D1Direction (Wind Direction)
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		Image arrow = new Image(getClass().getResourceAsStream("/compass.svg"));
+		if(arrow == null) {
+			throw new RuntimeException("Arrow Image did not load");
+		}
+
+		s2D1Arrow = new ImageView(arrow);
+
+		//Find the direction the arrow faces
+		Double direction = getDirection(forecastTemp.get(PerShift).windDirection);
+
+		//Rotate Image
+		s2D1Arrow.setRotate(direction);
+		//-------------------------
+		Image compass = new Image(getClass().getResourceAsStream("/compass_arrow_north.svg"));
+		if(compass == null) {
+			throw new RuntimeException("Compass Image did not load");
+		}
+
+		s2D1Compass = new ImageView(compass);
+		//-------------------------
+		s2D1Direction = new StackPane(s2D1Compass, s2D1Arrow);
+		//-------------------------
+		s2vbD1Direction = new VBox(10, s2D1Direction);
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		s2hbDay1 = new HBox(10,s2vbD1Temp,s2vbD1forecast,s2vbD1Speed,s2vbD1Direction);
+
+
+		s2 = new Scene(s2hbDay1, 700, 700);
 
 		//End of Scene2
 
