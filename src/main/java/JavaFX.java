@@ -245,7 +245,14 @@ public class JavaFX extends Application {
 		s1vbHour7.setPrefWidth(75);
 
 		s1hbHourlyTemp = new HBox(20, s1vbHour1, s1vbHour2, s1vbHour3, s1vbHour4, s1vbHour5, s1vbHour6, s1vbHour7);
-		s1vbMain = new VBox(20,s1hbTemp,s1hbWeather,s1hbHourlyTemp);
+
+		s1bThreeDayForecast = new Button("View 3 Day Forecast");
+		s1bThreeDayForecast.setOnAction(e-> {
+			primaryStage.setScene(s2);
+		});
+
+
+		s1vbMain = new VBox(20,s1hbTemp,s1hbWeather,s1hbHourlyTemp,s1bThreeDayForecast);
 		s1bp = new BorderPane();
 		s1bp.setPadding(new Insets(20));
 		s1bp.setCenter(s1vbMain);
@@ -353,7 +360,7 @@ public class JavaFX extends Application {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Default scene shown
-		primaryStage.setScene(s1);
+		primaryStage.setScene(s2);
 		primaryStage.show();
 	}
 
