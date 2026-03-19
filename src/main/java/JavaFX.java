@@ -7,12 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import weather.Period;
@@ -105,52 +107,52 @@ public class JavaFX extends Application {
 	public static double getDirection(String direction) {
 		double angle = 0;
 
-		if(direction == "N") {
+		if(direction.equals("N")) {
 			angle = 0;
 		}
-		else if(direction == "NNE") {
+		else if(direction.equals("NNE")) {
 			angle = 22.5;
 		}
-		else if(direction == "NE") {
+		else if(direction.equals("NE")) {
 			angle = 45;
 		}
-		else if(direction == "ENE") {
+		else if(direction.equals("ENE")) {
 			angle = 67.5;
 		}
-		else if(direction == "E") {
+		else if(direction.equals("E")) {
 			angle = 90;
 		}
-		else if(direction == "ESE") {
+		else if(direction.equals("ESE")) {
 			angle = 112.5;
 		}
-		else if(direction == "SE") {
+		else if(direction.equals("SE")) {
 			angle = 135;
 		}
-		else if(direction == "SSE") {
+		else if(direction.equals("SSE")) {
 			angle = 157.5;
 		}
-		else if(direction == "S") {
+		else if(direction.equals("S")) {
 			angle = 180;
 		}
-		else if(direction == "SSW") {
+		else if(direction.equals("SSW")) {
 			angle = 202.5;
 		}
-		else if(direction == "SW") {
+		else if(direction.equals("SW")) {
 			angle = 225;
 		}
-		else if(direction == "WSW") {
+		else if(direction.equals("WSW")) {
 			angle = 247.5;
 		}
-		else if(direction == "W") {
+		else if(direction.equals("W")) {
 			angle = 270;
 		}
-		else if(direction == "WNW") {
+		else if(direction.equals("WNW")) {
 			angle = 292.5;
 		}
-		else if(direction == "NW") {
+		else if(direction.equals("NW")) {
 			angle = 315;
 		}
-		else if(direction == "NNW") {
+		else if(direction.equals("NNW")) {
 			angle = 337.5;
 		}
 
@@ -325,7 +327,20 @@ public class JavaFX extends Application {
 
 		//s2D1Direction (Wind Direction)
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		Image arrow = new Image(getClass().getResourceAsStream("/compass.svg"));
+		Image compass = new Image(getClass().getResourceAsStream("/compass.png"));
+		if(compass == null) {
+			throw new RuntimeException("Compass Image did not load");
+		}
+
+		s2D1Compass = new ImageView(compass);
+
+		//Scale image
+		s2D1Compass.setPreserveRatio(true);
+		s2D1Compass.setSmooth(true);
+		s2D1Compass.setFitHeight(200);
+		s2D1Compass.setFitWidth(200);
+		//-------------------------
+		Image arrow = new Image(getClass().getResourceAsStream("/compass_arrow_north.png"));
 		if(arrow == null) {
 			throw new RuntimeException("Arrow Image did not load");
 		}
@@ -337,13 +352,12 @@ public class JavaFX extends Application {
 
 		//Rotate Image
 		s2D1Arrow.setRotate(direction);
-		//-------------------------
-		Image compass = new Image(getClass().getResourceAsStream("/compass_arrow_north.svg"));
-		if(compass == null) {
-			throw new RuntimeException("Compass Image did not load");
-		}
 
-		s2D1Compass = new ImageView(compass);
+		//Scale image
+		s2D1Arrow.setPreserveRatio(true);
+		s2D1Arrow.setSmooth(true);
+		s2D1Arrow.setFitHeight(100);
+		s2D1Arrow.setFitWidth(100);
 		//-------------------------
 		s2D1Direction = new StackPane(s2D1Compass, s2D1Arrow);
 		//-------------------------
@@ -360,7 +374,7 @@ public class JavaFX extends Application {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Default scene shown
-		primaryStage.setScene(s2);
+		primaryStage.setScene(s1);
 		primaryStage.show();
 	}
 
