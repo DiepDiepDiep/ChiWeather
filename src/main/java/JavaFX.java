@@ -1,6 +1,7 @@
 import javafx.application.Application;
 
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 
 import javafx.event.ActionEvent;
@@ -55,6 +56,7 @@ public class JavaFX extends Application {
 	Scene s2;
 	VBox s2vbMain;
 	HBox s2hbTitle, s2hbDay1, s2hbDay2, s2hbDay3;
+	Button s2ButtSwitch;
 
 	VBox s2vbD1Temp, s2vbD1forecast, s2vbD1Speed, s2vbD1Direction;
 	TextField s2D1Day, s2D1DTemp, s2D1NTemp, s2D1Speed;
@@ -289,15 +291,21 @@ public class JavaFX extends Application {
 		 //Set text for s2D1Day to day
 		 s2D1Day.setText(dayName);
 
+		 s2D1Day.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+
 		 //-------------------------
 		 s2D1DTemp = new TextField();
 
 		 //Get the current day temperature
 		 s2D1DTemp.setText("Day: " + forecastTemp.get(PerShift).temperature + forecastTemp.get(PerShift).temperatureUnit);
+
+		 s2D1DTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 		 //-------------------------
 		 s2D1NTemp = new TextField();
 
 		 s2D1NTemp.setText("Night: " + forecastTemp.get(PerShift + 1).temperature + forecastTemp.get(PerShift + 1).temperatureUnit);
+
+		 s2D1NTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 	    //-------------------------
 		s2vbD1Temp = new VBox(10, s2D1Day, s2D1DTemp,s2D1NTemp);
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -321,6 +329,10 @@ public class JavaFX extends Application {
 
 		//Get the current wind speed.
 		s2D1Speed.setText(forecastTemp.get(PerShift).windSpeed);
+
+		s2D1Speed.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+
+		s2D1Speed.setAlignment(Pos.CENTER);
 		//-------------------------
 		s2vbD1Speed = new VBox(10, s2D1Speed);
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -366,8 +378,19 @@ public class JavaFX extends Application {
 
 		s2hbDay1 = new HBox(10,s2vbD1Temp,s2vbD1forecast,s2vbD1Speed,s2vbD1Direction);
 
+		s2hbDay1.setStyle("-fx-border-color: black; -fx-border-width: 2;");
 
-		s2 = new Scene(s2hbDay1, 700, 700);
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		s2ButtSwitch = new Button();
+		s2ButtSwitch.setText("Back");
+		s2ButtSwitch.setOnAction(e->{
+			primaryStage.setScene(s1);
+		});
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		s2vbMain = new VBox(s2ButtSwitch, s2hbDay1);
+
+		s2 = new Scene(s2vbMain, 700, 700);
 
 		//End of Scene2
 
