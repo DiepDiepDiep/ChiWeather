@@ -40,8 +40,6 @@ import java.util.Locale;
 
 public class JavaFX extends Application {
 
-	//Scene 1 attributes
-
 	TextArea temperature,weather;
 	//Scene 1 attributes
 	Scene s1;
@@ -200,7 +198,7 @@ public class JavaFX extends Application {
 		weather.setPrefHeight(70);
 		weather.setEditable(false);
 
-		temperature.setText("Today's weather is: "+String.valueOf(forecast.get(0).temperature)+" °F");
+		temperature.setText("Today's weather is: "+String.valueOf(forecast.get(0).temperature)+" °" + forecast.get(0).temperatureUnit);
 		weather.setText("Today's conditions: "+forecast.get(0).detailedForecast);
 		s1hbTemp = new HBox(20, temperature);
 		s1hbWeather = new HBox(20, weather);
