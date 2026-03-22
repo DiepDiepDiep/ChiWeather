@@ -291,7 +291,13 @@ public class JavaFX extends Application {
 		 //Set text for s2D1Day to day
 		 s2D1Day.setText(dayName);
 
-		 s2D1Day.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+		 //Set settings for textField
+		 s2D1Day.setEditable(false);
+		 s2D1Day.setPrefHeight(35);
+
+		//Set the border
+		 s2D1Day.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; " +
+				 			"-fx-font-size: 30px; -fx-font-family: Arial; -fx-alignment: center-left");
 
 		 //-------------------------
 		 s2D1DTemp = new TextField();
@@ -299,15 +305,26 @@ public class JavaFX extends Application {
 		 //Get the current day temperature
 		 s2D1DTemp.setText("Day: " + forecastTemp.get(PerShift).temperature + forecastTemp.get(PerShift).temperatureUnit);
 
-		 s2D1DTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+		//Set settings for textField
+		s2D1DTemp.setEditable(false);
+		s2D1DTemp.setPrefHeight(45);
+		//s2D1NTemp.setPrefWidth(165);
+
+		 s2D1DTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
+				 			"-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
 		 //-------------------------
 		 s2D1NTemp = new TextField();
 
 		 s2D1NTemp.setText("Night: " + forecastTemp.get(PerShift + 1).temperature + forecastTemp.get(PerShift + 1).temperatureUnit);
 
-		 s2D1NTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+		//Set settings for textField
+		s2D1NTemp.setEditable(false);
+		s2D1NTemp.setPrefHeight(35);
+
+		 s2D1NTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
+				 			"-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
 	    //-------------------------
-		s2vbD1Temp = new VBox(10, s2D1Day, s2D1DTemp,s2D1NTemp);
+		s2vbD1Temp = new VBox(1, s2D1Day, s2D1DTemp,s2D1NTemp);
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		//s2D1Forecast (Icons)
