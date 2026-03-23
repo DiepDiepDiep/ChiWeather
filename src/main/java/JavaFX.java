@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import weather.Period;
 import weather.Properties;
 import weather.WeatherAPI;
-
 import java.awt.*;
 import java.util.Date;
 
@@ -47,7 +46,6 @@ public class JavaFX extends Application {
 	HBox s1hbTemp, s1hbWeather, s1hbHourlyTemp, s1hbButton;
 	Button s1bThreeDayForecast;
 	BorderPane s1bp;
-	TextField s1tfHour1, s1tfHour2, s1tfHour3, s1tfHour4, s1tfHour5, s1tfHour6, s1tfHour7;
 
 
 	//Scene 2 attributes
@@ -82,14 +80,6 @@ public class JavaFX extends Application {
 		}
 	}
 
-
-	private void makeScene1Hourly(ArrayList<Period> forecast, int hour){
-		s1tfHour1 = new TextField();
-		s1tfHour1.setEditable(false);
-		s1tfHour1.setText(String.valueOf(forecast.get(0).temperature));
-		s1vbHour1 = new VBox(20,s1tfHour1);
-		s1vbHour1.setPrefWidth(75);
-	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
 	//Scene2 Functions
@@ -203,49 +193,14 @@ public class JavaFX extends Application {
 		s1hbTemp = new HBox(20, temperature);
 		s1hbWeather = new HBox(20, weather);
 
-//HBOX with hourly times
-		s1tfHour1 = new TextField();
-		s1tfHour1.setEditable(false);
-		s1tfHour1.setText(String.valueOf(hourlyForecast.periods.get(1).temperature));
-		s1vbHour1 = new VBox(20,s1tfHour1);
-		s1vbHour1.setPrefWidth(75);
-
-		s1tfHour2 = new TextField();
-		s1tfHour2.setEditable(false);
-		s1tfHour2.setText(String.valueOf(hourlyForecast.periods.get(2).temperature));
-		s1vbHour2 = new VBox(20,s1tfHour2);
-		s1vbHour2.setPrefWidth(75);
-
-		s1tfHour3 = new TextField();
-		s1tfHour3.setEditable(false);
-		s1tfHour3.setText(String.valueOf(hourlyForecast.periods.get(3).temperature));
-		s1vbHour3 = new VBox(20,s1tfHour3);
-		s1vbHour3.setPrefWidth(75);
-
-		s1tfHour4 = new TextField();
-		s1tfHour4.setEditable(false);
-		s1tfHour4.setText(String.valueOf(hourlyForecast.periods.get(4).temperature));
-		s1vbHour4 = new VBox(20,s1tfHour4);
-		s1vbHour4.setPrefWidth(75);
-
-		s1tfHour5 = new TextField();
-		s1tfHour5.setEditable(false);
-		s1tfHour5.setText(String.valueOf(hourlyForecast.periods.get(5).temperature));
-		s1vbHour5 = new VBox(20,s1tfHour5);
-		s1vbHour5.setPrefWidth(75);
-
-		s1tfHour6 = new TextField();
-		s1tfHour6.setEditable(false);
-		s1tfHour6.setText(String.valueOf(hourlyForecast.periods.get(6).temperature));
-		s1vbHour6 = new VBox(20,s1tfHour6);
-		s1vbHour6.setPrefWidth(75);
-
-		s1tfHour7 = new TextField();
-		s1tfHour7.setEditable(false);
-		s1tfHour7.setText(String.valueOf(forecast.get(7).temperature));
-		s1vbHour7 = new VBox(20,s1tfHour7);
-		s1vbHour7.setPrefWidth(75);
-
+		//HBOX with hourly times
+		s1vbHour1 = new HourlyVBox(hourlyForecast, 1).buildBox();
+		s1vbHour2 = new HourlyVBox(hourlyForecast, 2).buildBox();
+		s1vbHour3 = new HourlyVBox(hourlyForecast, 3).buildBox();
+		s1vbHour4 = new HourlyVBox(hourlyForecast, 4).buildBox();
+		s1vbHour5 = new HourlyVBox(hourlyForecast, 5).buildBox();
+		s1vbHour6 = new HourlyVBox(hourlyForecast, 6).buildBox();
+		s1vbHour7 = new HourlyVBox(hourlyForecast, 7).buildBox();
 		s1hbHourlyTemp = new HBox(20, s1vbHour1, s1vbHour2, s1vbHour3, s1vbHour4, s1vbHour5, s1vbHour6, s1vbHour7);
 
 		s1bThreeDayForecast = new Button("View 3 Day Forecast");
