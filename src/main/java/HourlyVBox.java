@@ -5,11 +5,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+//Same constructor behavior as super class Scene1VBox
 public class HourlyVBox extends Scene1VBox{
     public HourlyVBox(Properties hourlyForecast, int day) {
         super(hourlyForecast, day);
     }
 
+
+
+    //Specific text set for HourlyVBox objects
     @Override
     void setText(TextArea tf) {
         LocalTime curr= LocalTime.now().plusHours(day);

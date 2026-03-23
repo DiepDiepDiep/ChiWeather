@@ -6,12 +6,14 @@ public abstract class Scene1VBox {
     protected Properties hourlyForecast;
     protected int day;
 
+
+    //Parameterized Constructor that sets the values for the protected variables in an object
     public Scene1VBox(Properties hourlyForecast, int day) {
         this.hourlyForecast = hourlyForecast;
         this.day = day;
     }
 
-    // Template method design pattern
+    //Default definition for building a VBox
     public VBox buildBox() {
         TextArea tf = new TextArea();
         tf.setPrefHeight(75);
@@ -24,5 +26,6 @@ public abstract class Scene1VBox {
         return vb;
     }
 
+    //Abstract method for setting the text within a TextArea
     abstract void setText(TextArea tf);
 }
