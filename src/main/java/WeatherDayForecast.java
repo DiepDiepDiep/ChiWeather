@@ -16,63 +16,30 @@ public class WeatherDayForecast implements ForecastDayTemp {
     private static double getDirection(String direction) {
         double angle = 0;
 
-        if(direction.equals("N")) {
-            angle = 0;
-        }
-        else if(direction.equals("NNE")) {
-            angle = 22.5;
-        }
-        else if(direction.equals("NE")) {
-            angle = 45;
-        }
-        else if(direction.equals("ENE")) {
-            angle = 67.5;
-        }
-        else if(direction.equals("E")) {
-            angle = 90;
-        }
-        else if(direction.equals("ESE")) {
-            angle = 112.5;
-        }
-        else if(direction.equals("SE")) {
-            angle = 135;
-        }
-        else if(direction.equals("SSE")) {
-            angle = 157.5;
-        }
-        else if(direction.equals("S")) {
-            angle = 180;
-        }
-        else if(direction.equals("SSW")) {
-            angle = 202.5;
-        }
-        else if(direction.equals("SW")) {
-            angle = 225;
-        }
-        else if(direction.equals("WSW")) {
-            angle = 247.5;
-        }
-        else if(direction.equals("W")) {
-            angle = 270;
-        }
-        else if(direction.equals("WNW")) {
-            angle = 292.5;
-        }
-        else if(direction.equals("NW")) {
-            angle = 315;
-        }
-        else if(direction.equals("NNW")) {
-            angle = 337.5;
+        switch(direction) {
+            case "N": angle = 0; break;
+            case "NNE": angle = 22.5; break;
+            case "NE": angle = 45; break;
+            case "ENE": angle = 67.5; break;
+            case "E": angle = 90; break;
+            case "ESE": angle = 112.5; break;
+            case "SE": angle = 135; break;
+            case "SSE": angle = 157.5; break;
+            case "S": angle = 180; break;
+            case "SSW": angle = 202.5; break;
+            case "SW": angle = 225; break;
+            case "WSW": angle = 247.5; break;
+            case "W": angle = 270; break;
+            case "WNW": angle = 292.5; break;
+            case "NW": angle = 315; break;
+            case "NNW": angle = 337.5; break;
         }
 
         return angle;
     }
 
     @Override
-    public ForecastDay BuildOverview(Period dPeriod, Period nPeriod) {
-        ForecastDay Day = new ForecastDay();
-        
-        //VBox for the Current Day, Day temp, and Night temp
+    public void BuildTempVBox(Period dPeriod, Period nPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.CurrDay = new TextField();
 
@@ -117,21 +84,25 @@ public class WeatherDayForecast implements ForecastDayTemp {
                 "-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.VBoxTemp = new VBox(1, Day.CurrDay, Day.DayTemp, Day.NightTemp);
+    }
 
-        //VBox for the Forecast (Icons)
+    @Override
+    public void BuildForecastVBox(Period dPeriod, Period nPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Image Dforecast = new Image(dPeriod.icon);
 
         Day.DayForecast = new ImageView(Dforecast);
-        //-------------------------
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Image Nforecast = new Image(dPeriod.icon);
 
         Day.NightForecast = new ImageView(Nforecast);
-        //-------------------------
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.VBForecast = new VBox(10, Day.DayForecast, Day.NightForecast);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        
-        //VBox for the wind speed
+    }
+
+    @Override
+    public void BuildSpeedVBox(Period dPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.WindSpeed = new TextField();
 
@@ -143,8 +114,10 @@ public class WeatherDayForecast implements ForecastDayTemp {
         Day.WindSpeed.setAlignment(Pos.CENTER);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.VBSpeed = new VBox(10, Day.WindSpeed);
+    }
 
-        //s2D1Direction (Wind Direction)
+    @Override
+    public void BuildDirectionVBox(Period dPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Image compass = new Image(getClass().getResourceAsStream("/compass.png"));
         if(compass == null) {
@@ -181,6 +154,23 @@ public class WeatherDayForecast implements ForecastDayTemp {
         Day.WindDirection = new StackPane(Day.WindCompass, Day.WindArrow);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.VBDirection = new VBox(10, Day.WindDirection);
+    }
+
+    @Override
+    public ForecastDay BuildOverview(Period dPeriod, Period nPeriod) {
+        ForecastDay Day = new ForecastDay();
+        
+        //VBox for the Current Day, Day temp, and Night temp
+        BuildTempVBox(dPeriod, nPeriod, Day);
+
+        //VBox for the Forecast (Icons)
+        BuildForecastVBox(dPeriod, nPeriod, Day);
+        
+        //VBox for the wind speed
+        BuildSpeedVBox(dPeriod, Day);
+
+        //s2D1Direction (Wind Direction)
+        BuildDirectionVBox(dPeriod, Day);
 
         Day.Overview = new HBox(10, Day.VBoxTemp, Day.VBForecast, Day.VBSpeed, Day.VBDirection);
 
