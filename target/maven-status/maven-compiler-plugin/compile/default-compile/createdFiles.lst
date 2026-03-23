@@ -1,4 +1,3 @@
-Scene1Template.class
 JavaFX$Locations.class
 weather/Properties.class
 MyWeatherAPI.class
@@ -6,10 +5,12 @@ weather/Elevation.class
 weather/RelativeHumidity.class
 weather/Dewpoint.class
 weather/Root.class
-HBoxDayTemplate.class
 JavaFX$ButtonExitHandler.class
 weather/Geometry.class
+ForecastDay.class
+WeatherDayForecast.class
 weather/Period.class
 weather/WeatherAPI.class
 JavaFX.class
 weather/ProbabilityOfPrecipitation.class
+ForecastDayTemp.class

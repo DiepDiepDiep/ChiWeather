@@ -86,6 +86,10 @@ public class WeatherDayForecast implements ForecastDayTemp {
         //Set settings for textField
         Day.CurrDay.setEditable(false);
         Day.CurrDay.setPrefHeight(35);
+
+        //Set the border
+        Day.CurrDay.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
+                "-fx-font-size: 30px; -fx-font-family: Arial; -fx-alignment: center-left");
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.DayTemp = new TextField();
 
@@ -95,6 +99,10 @@ public class WeatherDayForecast implements ForecastDayTemp {
         //Set settings for textField
         Day.DayTemp.setEditable(false);
         Day.DayTemp.setPrefHeight(45);
+
+        //Set the border
+        Day.DayTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
+                "-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.NightTemp = new TextField();
 
@@ -103,6 +111,10 @@ public class WeatherDayForecast implements ForecastDayTemp {
         //Set settings for textField
         Day.NightTemp.setEditable(false);
         Day.NightTemp.setPrefHeight(35);
+
+        //Set the border
+        Day.NightTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
+                "-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.VBoxTemp = new VBox(1, Day.CurrDay, Day.DayTemp, Day.NightTemp);
 
@@ -130,7 +142,7 @@ public class WeatherDayForecast implements ForecastDayTemp {
 
         Day.WindSpeed.setAlignment(Pos.CENTER);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        Day.VBForecast = new VBox(10, Day.WindSpeed);
+        Day.VBSpeed = new VBox(10, Day.WindSpeed);
 
         //s2D1Direction (Wind Direction)
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -171,6 +183,8 @@ public class WeatherDayForecast implements ForecastDayTemp {
         Day.VBDirection = new VBox(10, Day.WindDirection);
 
         Day.Overview = new HBox(10, Day.VBoxTemp, Day.VBForecast, Day.VBSpeed, Day.VBDirection);
+
+        Day.Overview.setStyle("-fx-border-color: black; -fx-border-width: 2;");
 
         return Day;
     }
