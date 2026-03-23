@@ -110,7 +110,7 @@ public class WeatherDayForecast implements ForecastDayTemp {
         Day.WindSpeed = new TextField();
 
         //Get the current wind speed.
-        Day.WindSpeed.setText(dPeriod.windSpeed);
+        Day.WindSpeed.setText(dPeriod.windSpeed+" going "+dPeriod.windDirection);
 
         Day.WindSpeed.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
