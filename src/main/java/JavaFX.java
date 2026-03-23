@@ -22,16 +22,14 @@ import weather.Period;
 import weather.Properties;
 import weather.WeatherAPI;
 import java.awt.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.InputStream;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.time.Instant;
 
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -188,7 +186,10 @@ public class JavaFX extends Application {
 		weather.setPrefHeight(70);
 		weather.setEditable(false);
 
-		temperature.setText("Today's weather is: "+String.valueOf(forecast.get(0).temperature)+" °" + forecast.get(0).temperatureUnit);
+		LocalTime curr= LocalTime.now();
+		String currTime = curr.format(DateTimeFormatter.ofPattern("hh:mm a"));
+
+		temperature.setText(""+currTime+"\nToday's weather is: "+String.valueOf(forecast.get(0).temperature)+" °" + forecast.get(0).temperatureUnit);
 		weather.setText("Today's conditions: "+forecast.get(0).detailedForecast);
 		s1hbTemp = new HBox(20, temperature);
 		s1hbWeather = new HBox(20, weather);
@@ -207,7 +208,6 @@ public class JavaFX extends Application {
 		s1bThreeDayForecast.setOnAction(e-> {
 			primaryStage.setScene(s2);
 		});
-
 
 		s1vbMain = new VBox(20,s1hbTemp,s1hbWeather,s1hbHourlyTemp,s1bThreeDayForecast);
 		s1bp = new BorderPane();
