@@ -38,8 +38,8 @@ public class WeatherDayForecast implements ForecastDayTemp {
         return angle;
     }
 
-    @Override
-    public void BuildTempVBox(Period dPeriod, Period nPeriod, ForecastDay Day) {
+    //Function to build the VBox that shows curr day, day temp, and night temp.
+    private void BuildTempVBox(Period dPeriod, Period nPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.CurrDay = new TextField();
 
@@ -86,8 +86,8 @@ public class WeatherDayForecast implements ForecastDayTemp {
         Day.VBoxTemp = new VBox(1, Day.CurrDay, Day.DayTemp, Day.NightTemp);
     }
 
-    @Override
-    public void BuildForecastVBox(Period dPeriod, Period nPeriod, ForecastDay Day) {
+    //Function to build the VBox that shows the icons that show that the forecast for that day is
+    private void BuildForecastVBox(Period dPeriod, Period nPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Image Dforecast = new Image(dPeriod.icon);
 
@@ -101,8 +101,8 @@ public class WeatherDayForecast implements ForecastDayTemp {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
 
-    @Override
-    public void BuildSpeedVBox(Period dPeriod, ForecastDay Day) {
+    //Function to build the VBox that shows the wind speed for that day
+    private void BuildSpeedVBox(Period dPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Day.WindSpeed = new TextField();
 
@@ -116,8 +116,8 @@ public class WeatherDayForecast implements ForecastDayTemp {
         Day.VBSpeed = new VBox(10, Day.WindSpeed);
     }
 
-    @Override
-    public void BuildDirectionVBox(Period dPeriod, ForecastDay Day) {
+    //Fucntion to build the VBox that shows the wind direction
+    private void BuildDirectionVBox(Period dPeriod, ForecastDay Day) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Image compass = new Image(getClass().getResourceAsStream("/compass.png"));
         if(compass == null) {
