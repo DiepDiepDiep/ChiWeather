@@ -7,10 +7,12 @@ weather/Dewpoint.class
 weather/Root.class
 JavaFX$ButtonExitHandler.class
 weather/Geometry.class
+Scene1VBox.class
 ForecastDay.class
 WeatherDayForecast.class
 weather/Period.class
 weather/WeatherAPI.class
 JavaFX.class
 weather/ProbabilityOfPrecipitation.class
+HourlyVBox.class
 ForecastDayTemp.class

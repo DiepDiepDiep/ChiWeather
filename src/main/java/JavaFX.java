@@ -192,7 +192,7 @@ public class JavaFX extends Application {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Default scene shown
-		primaryStage.setScene(s2);
+		primaryStage.setScene(s1);
 		primaryStage.show();
 	}
 
