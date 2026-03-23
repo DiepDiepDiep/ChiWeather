@@ -60,8 +60,6 @@ public class JavaFX extends Application {
 	TextField s3tfTitle;
 	Button s3BackSwitch, s3ConvertSwitch;
 
-	//--------------------------------------------------------------------------------------------------------------------------------------------
-	//Scene1 Functions
 
 	private class ButtonExitHandler implements EventHandler<ActionEvent>{
 
@@ -72,20 +70,6 @@ public class JavaFX extends Application {
 	}
 
 
-	//--------------------------------------------------------------------------------------------------------------------------------------------
-	//Scene2 Functions
-	public class Locations {
-		int Long;
-		int Lat;
-		String City;
-
-		public void getLocation(String Loc) {
-			String City = Loc;
-
-		}
-	}
-
-	//--------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static void main(String[] args) {
 		launch(args);
