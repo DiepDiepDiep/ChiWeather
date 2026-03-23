@@ -16,13 +16,14 @@ public abstract class Scene1VBox {
     //Default definition for building a VBox
     public VBox buildBox() {
         TextArea tf = new TextArea();
-        tf.setPrefHeight(75);
+        tf.setPrefHeight(120);
         tf.setEditable(false);
         setText(tf);
         tf.setStyle("-fx-font-size: 14; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; ");
         VBox vb = new VBox(20, tf);
-        vb.setPrefWidth(125);
-        vb.setPrefHeight(125);
+        vb.setPrefWidth(130);
+        vb.setPrefHeight(160);
+
         return vb;
     }
 

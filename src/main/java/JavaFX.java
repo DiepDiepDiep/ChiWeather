@@ -109,8 +109,8 @@ public class JavaFX extends Application {
 		temperature = new TextArea();
 		temperature.setPrefWidth(700);
 		temperature.setEditable(false);
-		temperature.setMaxHeight(7);
-
+		temperature.setPrefHeight(120);
+		temperature.setStyle("-fx-font-size: 32px; -fx-text-fill: #263CEB; -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #263CEB; -fx-border-width: 2;");
 		//Takes the current time and parses into a common format (hours:minutes (am/pm))
 		LocalTime curr= LocalTime.now();
 		String currTime = curr.format(DateTimeFormatter.ofPattern("hh:mm a"));
@@ -122,10 +122,10 @@ public class JavaFX extends Application {
 		weather = new TextArea();
 		weather.setWrapText(true);
 		weather.setPrefWidth(700);
-		weather.setPrefHeight(70);
+		weather.setPrefHeight(150);
 		weather.setEditable(false);
-		weather.setText("Today's conditions: "+forecast.get(0).detailedForecast);
-
+		weather.setStyle("-fx-font-size: 26px; -fx-text-fill: #263CEB; -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #263CEB; -fx-border-width: 2;");
+		weather.setText("Today's conditions: " + forecast.get(0).detailedForecast);
 		//Adds the both the temperature and weather descriptions into HBoxes
 		s1hbTemp = new HBox(20, temperature);
 		s1hbWeather = new HBox(20, weather);
@@ -156,7 +156,9 @@ public class JavaFX extends Application {
 
 		//Button that, upon user interaction, switches to a scene that displays a 3-day weather forecast (scene2)
 		s1bThreeDayForecast = new Button("View 3 Day Forecast");
-		s1bThreeDayForecast.setOnAction(e-> {
+		s1bThreeDayForecast.setPrefWidth(700);
+		s1bThreeDayForecast.setPrefHeight(100);
+		s1bThreeDayForecast.setStyle("-fx-font-size: 14px; -fx-background-color: #263CEB; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand;");		s1bThreeDayForecast.setOnAction(e-> {
 			primaryStage.setScene(s2);
 		});
 
