@@ -93,7 +93,7 @@ public class WeatherDayForecast implements ForecastDayTemp {
 
         Day.DayForecast = new ImageView(Dforecast);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        Image Nforecast = new Image(dPeriod.icon);
+        Image Nforecast = new Image(nPeriod.icon);
 
         Day.NightForecast = new ImageView(Nforecast);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
