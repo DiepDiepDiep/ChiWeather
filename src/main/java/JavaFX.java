@@ -51,7 +51,7 @@ public class JavaFX extends Application {
 	VBox s2vbMain;
 	BorderPane s2bpTitle;
 	TextField s2tfTitle;
-	Button s2ButtSwitch;
+	Button s2BackSwitch, s2ConvertSwitch;
 
 	//Scene 3 attributes
 	Scene s3;
