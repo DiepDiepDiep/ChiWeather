@@ -53,6 +53,13 @@ public class JavaFX extends Application {
 	TextField s2tfTitle;
 	Button s2ButtSwitch;
 
+	//Scene 3 attributes
+	Scene s3;
+	VBox s3vbMain;
+	BorderPane s3bpTitle;
+	TextField s3tfTitle;
+	Button s3BackSwitch, s3ConvertSwitch;
+
 	//--------------------------------------------------------------------------------------------------------------------------------------------
 	//Scene1 Functions
 
@@ -195,27 +202,79 @@ public class JavaFX extends Application {
 
 		//Button to go back to Scene1
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		s2ButtSwitch = new Button();
-		s2ButtSwitch.setText("Back");
-		s2ButtSwitch.setOnAction(e ->
+		s2BackSwitch = new Button();
+		s2BackSwitch.setText("Back");
+		s2BackSwitch.setOnAction(e ->
 				primaryStage.setScene(s1));
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+		//Button to go to Scene3
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		s2ConvertSwitch = new Button();
+		s2ConvertSwitch.setText("Celsius");
+		s2ConvertSwitch.setOnAction(e ->
+				primaryStage.setScene(s3));
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 		s2bpTitle = new BorderPane();
-		s2bpTitle.setLeft(s2ButtSwitch);
+		s2bpTitle.setLeft(s2BackSwitch);
 		s2bpTitle.setCenter(s2tfTitle);
+		s2bpTitle.setRight(s2ConvertSwitch);
 
 
-		WeatherDayForecast factory = new WeatherDayForecast();
+		WeatherDayForecast factoryF = new WeatherDayForecast();
 
-		ForecastDay Day1 = factory.BuildOverview(forecast.get(PerShift), forecast.get(PerShift + 1));
-		ForecastDay Day2 = factory.BuildOverview(forecast.get(PerShift + 2), forecast.get(PerShift + 3));
-		ForecastDay Day3 = factory.BuildOverview(forecast.get(PerShift + 4), forecast.get(PerShift + 5));
+		ForecastDay Day1F = factoryF.BuildOverview(forecast.get(PerShift), forecast.get(PerShift + 1));
+		ForecastDay Day2F = factoryF.BuildOverview(forecast.get(PerShift + 2), forecast.get(PerShift + 3));
+		ForecastDay Day3F = factoryF.BuildOverview(forecast.get(PerShift + 4), forecast.get(PerShift + 5));
 
-		s2vbMain = new VBox(s2bpTitle, Day1.Overview, Day2.Overview, Day3.Overview);
+		s2vbMain = new VBox(s2bpTitle, Day1F.Overview, Day2F.Overview, Day3F.Overview);
 
 		s2 = new Scene(s2vbMain);
 //--------------------------------------------------------------------------------------------------------------------------------------------
+		//Start of Scene3
+		//TextField for Location
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		s3tfTitle = new TextField();
+		s3tfTitle.setText("Chicago");
+		s3tfTitle.setEditable(false);
+		s3tfTitle.setStyle("-fx-alignment: center; -fx-background-color: transparent; -fx-border-color: transparent;");
+		s3tfTitle.setAlignment(Pos.CENTER);
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		//Button to go back to Scene1
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		s3BackSwitch = new Button();
+		s3BackSwitch.setText("Back");
+		s3BackSwitch.setOnAction(e ->
+				primaryStage.setScene(s1));
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		//Button to go back to Scene2
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		s3ConvertSwitch = new Button();
+		s3ConvertSwitch.setText("Fahrenheit");
+		s3ConvertSwitch.setOnAction(e ->
+				primaryStage.setScene(s2));
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		s3bpTitle = new BorderPane();
+		s3bpTitle.setLeft(s3BackSwitch);
+		s3bpTitle.setCenter(s3tfTitle);
+		s3bpTitle.setRight(s3ConvertSwitch);
+
+
+		WeatherDayForecastC factoryC = new WeatherDayForecastC();
+
+		ForecastDay Day1C = factoryC.BuildOverview(forecast.get(PerShift), forecast.get(PerShift + 1));
+		ForecastDay Day2C = factoryC.BuildOverview(forecast.get(PerShift + 2), forecast.get(PerShift + 3));
+		ForecastDay Day3C = factoryC.BuildOverview(forecast.get(PerShift + 4), forecast.get(PerShift + 5));
+
+		s3vbMain = new VBox(s3bpTitle, Day1C.Overview, Day2C.Overview, Day3C.Overview);
+
+		s3 = new Scene(s3vbMain);
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
 
 		//Default scene shown
 		primaryStage.setScene(s1);
