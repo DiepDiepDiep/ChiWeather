@@ -110,13 +110,13 @@ public class JavaFX extends Application {
 		temperature.setPrefWidth(700);
 		temperature.setEditable(false);
 		temperature.setPrefHeight(120);
-		temperature.setStyle("-fx-font-size: 32px; -fx-text-fill: #263CEB; -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #263CEB; -fx-border-width: 2;");
+		temperature.setStyle("-fx-font-size: 25px; -fx-text-fill: #263CEB; -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #263CEB; -fx-border-width: 2;");
 		//Takes the current time and parses into a common format (hours:minutes (am/pm))
 		LocalTime curr= LocalTime.now();
 		String currTime = curr.format(DateTimeFormatter.ofPattern("hh:mm a"));
 
 		//Adds the current time and current temperature to be displayed within the textArea
-		temperature.setText(""+currTime+"\nToday's weather is: "+String.valueOf(forecast.get(0).temperature)+" °" + forecast.get(0).temperatureUnit);
+		temperature.setText(""+currTime+"\nChicago, IL\n"+String.valueOf(forecast.get(0).temperature)+" °" + forecast.get(0).temperatureUnit);
 
 		//TextArea that displays a detailed description/forecast of the current weather conditions
 		weather = new TextArea();
@@ -124,8 +124,8 @@ public class JavaFX extends Application {
 		weather.setPrefWidth(700);
 		weather.setPrefHeight(150);
 		weather.setEditable(false);
-		weather.setStyle("-fx-font-size: 26px; -fx-text-fill: #263CEB; -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #263CEB; -fx-border-width: 2;");
-		weather.setText("Today's conditions: " + forecast.get(0).detailedForecast);
+		weather.setStyle("-fx-font-size: 21px; -fx-text-fill: #263CEB; -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #263CEB; -fx-border-width: 2;");
+		weather.setText("Conditions for "+LocalDate.now() +"\n"+ forecast.get(0).detailedForecast);
 		//Adds the both the temperature and weather descriptions into HBoxes
 		s1hbTemp = new HBox(20, temperature);
 		s1hbWeather = new HBox(20, weather);
