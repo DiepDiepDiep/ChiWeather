@@ -88,7 +88,7 @@ public class JavaFX extends Application {
 	//feel free to remove the starter code from this method
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("I'm a professional Weather App!");
+		primaryStage.setTitle("ChiWeather");
 		ArrayList<Period> forecast = WeatherAPI.getForecast("LOT",77,70);
 		if (forecast == null){
 			throw new RuntimeException("Forecast did not load");
