@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Added Scene1 things with Scene2 things">
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Cnaged the image for the arrow to make it more easier to tell which direction the wind is going">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ForecastDay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ForecastDayTemp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/WeatherDayForecast.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -192,6 +195,8 @@
       <workItem from="1773684039766" duration="4173000" />
       <workItem from="1773854436943" duration="686000" />
       <workItem from="1773855158438" duration="3338000" />
+      <workItem from="1774244516563" duration="2346000" />
+      <workItem from="1774248937661" duration="3848000" />
     </task>
     <task id="LOCAL-00001" summary="Adding spacing comments for JAVAFX.java">
       <option name="closed" value="true" />

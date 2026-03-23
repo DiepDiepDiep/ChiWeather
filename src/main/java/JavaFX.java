@@ -49,23 +49,9 @@ public class JavaFX extends Application {
 	//Scene 2 attributes
 	Scene s2;
 	VBox s2vbMain;
-	HBox s2hbTitle, s2hbDay1, s2hbDay2, s2hbDay3;
+	BorderPane s2bpTitle;
+	TextField s2tfTitle;
 	Button s2ButtSwitch;
-
-	VBox s2vbD1Temp, s2vbD1forecast, s2vbD1Speed, s2vbD1Direction;
-	TextField s2D1Day, s2D1DTemp, s2D1NTemp, s2D1Speed;
-	ImageView s2D1Dforecast, s2D1Nforecast, s2D1Arrow, s2D1Compass;
-	StackPane s2D1Direction;
-
-	VBox s2vbD2Temp, s2vbD2forecast, s2vbD2Speed, s2vbD2Direction;
-	TextField s2D2Day, s2D2DTemp, s2D2NTemp, s2D2Speed;
-	ImageView s2D2Dforecast, s2D2Nforecast, s2D2Arrow, s2D2Compass;
-	StackPane s2D2Direction;
-
-	VBox s2vbD3Temp, s2vbD3forecast, s2vbD3Speed, s2vbD3Direction;
-	TextField s2D3Day, s2D3DTemp, s2D3NTemp, s2D3Speed;
-	ImageView s2D3Dforecast, s2D3Nforecast, s2D3Arrow, s2D3Compass;
-	StackPane s2D3Direction;
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
 	//Scene1 Functions
@@ -90,61 +76,6 @@ public class JavaFX extends Application {
 			String City = Loc;
 
 		}
-	}
-
-	public static double getDirection(String direction) {
-		double angle = 0;
-
-		if(direction.equals("N")) {
-			angle = 0;
-		}
-		else if(direction.equals("NNE")) {
-			angle = 22.5;
-		}
-		else if(direction.equals("NE")) {
-			angle = 45;
-		}
-		else if(direction.equals("ENE")) {
-			angle = 67.5;
-		}
-		else if(direction.equals("E")) {
-			angle = 90;
-		}
-		else if(direction.equals("ESE")) {
-			angle = 112.5;
-		}
-		else if(direction.equals("SE")) {
-			angle = 135;
-		}
-		else if(direction.equals("SSE")) {
-			angle = 157.5;
-		}
-		else if(direction.equals("S")) {
-			angle = 180;
-		}
-		else if(direction.equals("SSW")) {
-			angle = 202.5;
-		}
-		else if(direction.equals("SW")) {
-			angle = 225;
-		}
-		else if(direction.equals("WSW")) {
-			angle = 247.5;
-		}
-		else if(direction.equals("W")) {
-			angle = 270;
-		}
-		else if(direction.equals("WNW")) {
-			angle = 292.5;
-		}
-		else if(direction.equals("NW")) {
-			angle = 315;
-		}
-		else if(direction.equals("NNW")) {
-			angle = 337.5;
-		}
-
-		return angle;
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,156 +149,50 @@ public class JavaFX extends Application {
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 		//Start of Scene2
-		ArrayList<Period> forecastTemp = WeatherAPI.getForecast("LOT",77,70);
-		if (forecastTemp == null) {
-			throw new RuntimeException("Forecast did not load");
-		}
-		//Set up the elements for the smaller VBox's
+		int PerShift = 0;
 
-		int PerShift = 0; //Variable that determines if tomorrow is 1 period away or 2 period away
-
-		if(!forecastTemp.get(0).isDaytime) {
+		if(!forecast.get(0).isDaytime) {
 			PerShift = 1;
 		}
 		else {
 			PerShift = 2;
 		}
 
-		//s2D1Temp (Day, Day Temp, Night Temp)
+		//TextField for Location
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		 s2D1Day = new TextField();
-
-		 //Get the current Date from the API
-		 LocalDate localDate = forecastTemp.get(PerShift).startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		 String dayName = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
-
-		 //Set text for s2D1Day to day
-		 s2D1Day.setText(dayName);
-
-		 //Set settings for textField
-		 s2D1Day.setEditable(false);
-		 s2D1Day.setPrefHeight(35);
-
-		//Set the border
-		 s2D1Day.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; " +
-				 			"-fx-font-size: 30px; -fx-font-family: Arial; -fx-alignment: center-left");
-
-		 //-------------------------
-		 s2D1DTemp = new TextField();
-
-		 //Get the current day temperature
-		 s2D1DTemp.setText("Day: " + forecastTemp.get(PerShift).temperature + forecastTemp.get(PerShift).temperatureUnit);
-
-		//Set settings for textField
-		s2D1DTemp.setEditable(false);
-		s2D1DTemp.setPrefHeight(45);
-		//s2D1NTemp.setPrefWidth(165);
-
-		 s2D1DTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
-				 			"-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
-		 //-------------------------
-		 s2D1NTemp = new TextField();
-
-		 s2D1NTemp.setText("Night: " + forecastTemp.get(PerShift + 1).temperature + forecastTemp.get(PerShift + 1).temperatureUnit);
-
-		//Set settings for textField
-		s2D1NTemp.setEditable(false);
-		s2D1NTemp.setPrefHeight(35);
-
-		 s2D1NTemp.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;" +
-				 			"-fx-font-size: 20px; -fx-font-family: Arial; -fx-alignment: center-left");
-	    //-------------------------
-		s2vbD1Temp = new VBox(1, s2D1Day, s2D1DTemp,s2D1NTemp);
+		s2tfTitle = new TextField();
+		s2tfTitle.setText("Chicago");
+		s2tfTitle.setEditable(false);
+		s2tfTitle.setStyle("-fx-alignment: center; -fx-background-color: transparent; -fx-border-color: transparent;");
+		s2tfTitle.setAlignment(Pos.CENTER);
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		//s2D1Forecast (Icons)
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		Image Dforecast = new Image(forecastTemp.get(PerShift).icon);
-
-		s2D1Dforecast = new ImageView(Dforecast);
-		//-------------------------
-		Image Nforecast = new Image(forecastTemp.get(PerShift).icon);
-
-		s2D1Nforecast = new ImageView(Nforecast);
-		//-------------------------
-		s2vbD1forecast = new VBox(10, s2D1Dforecast, s2D1Nforecast);
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		//s2D1Speed (Wind Speed)
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		s2D1Speed = new TextField();
-
-		//Get the current wind speed.
-		s2D1Speed.setText(forecastTemp.get(PerShift).windSpeed);
-
-		s2D1Speed.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-
-		s2D1Speed.setAlignment(Pos.CENTER);
-		//-------------------------
-		s2vbD1Speed = new VBox(10, s2D1Speed);
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		//s2D1Direction (Wind Direction)
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		Image compass = new Image(getClass().getResourceAsStream("/compass.png"));
-		if(compass == null) {
-			throw new RuntimeException("Compass Image did not load");
-		}
-
-		s2D1Compass = new ImageView(compass);
-
-		//Scale image
-		s2D1Compass.setPreserveRatio(true);
-		s2D1Compass.setSmooth(true);
-		s2D1Compass.setFitHeight(200);
-		s2D1Compass.setFitWidth(200);
-		//-------------------------
-		Image arrow = new Image(getClass().getResourceAsStream("/compass_arrow_north.png"));
-		if(arrow == null) {
-			throw new RuntimeException("Arrow Image did not load");
-		}
-
-		s2D1Arrow = new ImageView(arrow);
-
-		//Find the direction the arrow faces
-		Double direction = getDirection(forecastTemp.get(PerShift).windDirection);
-
-		//Rotate Image
-		s2D1Arrow.setRotate(direction);
-
-		//Scale image
-		s2D1Arrow.setPreserveRatio(true);
-		s2D1Arrow.setSmooth(true);
-		s2D1Arrow.setFitHeight(100);
-		s2D1Arrow.setFitWidth(100);
-		//-------------------------
-		s2D1Direction = new StackPane(s2D1Compass, s2D1Arrow);
-		//-------------------------
-		s2vbD1Direction = new VBox(10, s2D1Direction);
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		s2hbDay1 = new HBox(10,s2vbD1Temp,s2vbD1forecast,s2vbD1Speed,s2vbD1Direction);
-
-		s2hbDay1.setStyle("-fx-border-color: black; -fx-border-width: 2;");
-
+		//Button to go back to Scene1
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		s2ButtSwitch = new Button();
 		s2ButtSwitch.setText("Back");
-		s2ButtSwitch.setOnAction(e->{
-			primaryStage.setScene(s1);
-		});
+		s2ButtSwitch.setOnAction(e ->
+				primaryStage.setScene(s1));
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		s2vbMain = new VBox(s2ButtSwitch, s2hbDay1);
+		s2bpTitle = new BorderPane();
+		s2bpTitle.setLeft(s2ButtSwitch);
+		s2bpTitle.setCenter(s2tfTitle);
 
-		s2 = new Scene(s2vbMain, 700, 700);
 
-		//End of Scene2
+		WeatherDayForecast factory = new WeatherDayForecast();
 
+		ForecastDay Day1 = factory.BuildOverview(forecast.get(PerShift), forecast.get(PerShift + 1));
+		ForecastDay Day2 = factory.BuildOverview(forecast.get(PerShift + 2), forecast.get(PerShift + 3));
+		ForecastDay Day3 = factory.BuildOverview(forecast.get(PerShift + 4), forecast.get(PerShift + 5));
+
+		s2vbMain = new VBox(s2bpTitle, Day1.Overview, Day2.Overview, Day3.Overview);
+
+		s2 = new Scene(s2vbMain);
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Default scene shown
-		primaryStage.setScene(s1);
+		primaryStage.setScene(s2);
 		primaryStage.show();
 	}
 
