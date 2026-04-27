@@ -22,6 +22,8 @@ git clone https://github.com/DiepDiepDiep/ChiWeather
 **2.** Run the app using the run button in your desired IDE
 
 
+**ChiWeather Demo Video**
+
 
 https://github.com/user-attachments/assets/e6c67ce1-cd78-427d-8be6-85822d4208c3
 
