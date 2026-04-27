@@ -10,6 +10,9 @@ ChiWeather is a weather app, which provides simple weather descriptions for the 
 
 This app utilizes the National Weather Service (NWS) API to allow for accurate forecasts and observations. Images describing the day’s weather accompany the forecast. Also the forecast can be viewed in either metric or imperial units.
 
+**Challenges**
+Understanding the different API calls proved to be an initial challenge. By consistently referencing the NWS API website, data was able to be used and displayed within the ChiWeather app.
+
 **Tech Stack (Languages, frameworks, tools)**
 
 Java/JavaFX, NWS API, Maven
